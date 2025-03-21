@@ -6,8 +6,8 @@ const input = require("fs")
   .split("\n");
 
 const N = +input.shift();
-const distances = input.shift().split(" ").map(Number);
-const prices = input.shift().split(" ").map(Number);
+const distances = input.shift().split(" ").map(BigInt);
+const prices = input.shift().split(" ").map(BigInt);
 
 prices.pop();
 
@@ -19,4 +19,4 @@ for (let i = 1; i < N - 1; i++) {
   total += currentPrice * distances[i];
 }
 
-console.log(total);
+console.log(total.toString());
