@@ -25,13 +25,17 @@ const setOrder = (a, b, n) => {
 };
 
 words.sort((a, b) => {
-  if (dict[a] < dict[b]) return 1;
-  else if (dict[a] === dict[b]) {
-    if (a.length < b.length) return 1;
-    else if (a.length === b.length) {
+  let numA = dict[a];
+  let numB = dict[b];
+  if (numA !== numB) {
+    return numB - numA;
+  } else {
+    if (a.length !== b.length) {
+      return b.length - a.length;
+    } else {
       return setOrder(a, b, a.length);
-    } else return -1;
-  } else return -1;
+    }
+  }
 });
 
 console.log(words.join("\n"));
