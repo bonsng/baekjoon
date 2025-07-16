@@ -1,12 +1,9 @@
 const fs = require("fs");
-const filePath = process.platform === "linux" ? "/dev/stdin" : "../test.txt";
-const input = fs.readFileSync(filePath).toString();
+const filepath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
+const input = fs.readFileSync(filepath).toString().trim().split("\n");
 
-const [N, C, ...data] = input
-  .trim()
-  .split(/\s/)
-  .filter((e) => e) // 이건 백준에서는 넣지 않아도 성공, 로컬에서는 실패
-  .map(Number);
+const [N, C] = input.shift().split(" ").map(Number);
+const data = input.map(Number);
 data.sort((a, b) => a - b);
 
 let start = 1;
@@ -17,10 +14,10 @@ while (start <= end) {
 
   let count = 1;
   let prev = data[0];
-  for (const cur of data) {
-    if (cur - prev < mid) continue;
-    prev = cur;
-    count += 1;
+  for (let i = 1; i < data.length; i++) {
+    if (data[i] - prev < mid) continue;
+    prev = data[i];
+    count++;
   }
 
   if (count < C) end = mid - 1;
